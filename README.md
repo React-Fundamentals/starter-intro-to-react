@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Demo Code
+
+The live demo code can be found [here](https://github.com/React-Fundamentals/starter-intro-to-react/tree/demo-cohort-3)
+
 ## Available Scripts
 
 In the project directory, you can run:
