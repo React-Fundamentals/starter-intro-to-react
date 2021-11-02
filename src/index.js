@@ -41,33 +41,78 @@ const validJSX = (
 
 // const Potato = ({ color = "blue" }) => <h1>My favorite potato is {color}</h1>;
 
-const Potato = ({ color, count, names = [] }) => {
+const Potato = ({ color, count, names = [], firstName, lastName }) => {
   const text = count === 1 ? `${count} potato` : `${count} potatoes`;
 
-  names.forEach((name) => console.log(name));
+  // names.forEach((name) => console.log(name));
+  const namesListItems = names.map((name, index) => (
+    <li key={`${name}-${index}`}>{name}</li>
+  ));
 
   return color ? (
     <>
       <h1>My favorite potato is {color}.</h1>
       <p>I ate {text} yesterday.</p>
+      <ul>{namesListItems}</ul>
+      <Person firstName={firstName} lastName={lastName} />
     </>
   ) : null;
 };
 
+function Person({ firstName, lastName }) {
+  return (
+    <h1>
+      My name is {firstName} {lastName}
+    </h1>
+  );
+}
+
 const names = ["Hou", "John", "Jane", "Bob"];
+
+function LoginButton() {
+  return <button>Login</button>;
+}
+
+function LogoutButton() {
+  return <button>Logout</button>;
+}
+
+function LoginControl({ isLoggedIn }) {
+  let button;
+  if (isLoggedIn) {
+    button = <LogoutButton />;
+  } else {
+    button = <LoginButton />;
+  }
+
+  return (
+    <>
+      <h2>isLoggedIn: {`${isLoggedIn}`}</h2>
+      {button}
+    </>
+  );
+}
 
 ReactDOM.render(
   <React.StrictMode>
+    <App />
+    <LoginControl isLoggedIn />
+    <LoginControl isLoggedIn={false} />
     {element}
     {subtract}
     {anotherElement}
     {yetAnotherElement}
     {greeting}
     {validJSX}
-    {/* <App /> */}
-    <Potato color="yellow" count={1} names={names} />
-    <Potato color="yellow" count={10} />
-    <Potato color="red" count={5} />
+    <Potato
+      firstName="Jane"
+      lastName="Doe"
+      color="yellow"
+      count={1}
+      names={names}
+    />
+    <Potato firstName="John" lastName="Doe" color="yellow" count={10} />
+    <Potato firstName="Hou" lastName="Chia" color="red" count={5} />
   </React.StrictMode>,
   document.getElementById("root")
 );
